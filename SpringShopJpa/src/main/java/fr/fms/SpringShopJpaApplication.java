@@ -37,8 +37,8 @@ public class SpringShopJpaApplication implements CommandLineRunner  {
 //			System.out.println(cat.getName());
 //		}
 //		
-		Article art1 = articleRepository.getArticleById((long) 1);
-		System.out.println(art1);
+//		Article art1 = articleRepository.getArticleById((long) 1);
+//		System.out.println(art1);
 		
 //		for(Article article: articleRepository.findByBrandContains("a")) {
 //			System.out.println(article.getBrand());
@@ -60,9 +60,41 @@ public class SpringShopJpaApplication implements CommandLineRunner  {
 //		
 //		articleRepository.save(new Article("R510", "Asus", 600, pc));
 		
-		for(String article: articleRepository.findByCategoryId((long) 4)) {
-			System.out.println(article);
+//		for(String article: articleRepository.findByCategoryId((long) 4)) {
+//			System.out.println(article);
+//		}
+		
+		//EXO 1.2
+		System.out.println("Exo 1.2");
+		System.out.println(articleRepository.getArticleById((long) 1));
+		System.out.println(articleRepository.findById((long) 1));
+		System.out.println("------------------");
+		
+		//EXO 1.3
+		System.out.println("Exo 1.3");
+		System.out.println(articleRepository.findByDescriptionAndBrand("MacBook", "Apple"));
+		System.out.println("--------");
+
+		//EXO 1.4
+		//articleRepository.deleteById((long) 5);
+		
+		//EXO 1.5
+		System.out.println("Exo 1.5");
+		Category smartphone = categoryRepository.findByName("Smartphone");
+		articleRepository.save(new Article((long) 3, "iPhone 13 - Lumière Stellaire", "Apple", 1209, smartphone));
+		//articleRepository.saveOrUpdate(new Article((long) 3, "iPhone 13 - Lumière Stellaire", "Apple", 1209, smartphone));
+		System.out.println("--------");
+		
+		//EXO 1.6
+		System.out.println("Exo 1.6");
+		for(Category cat : categoryRepository.findAllByOrderByNameDesc()){
+			System.out.println(cat);
 		}
+		System.out.println("--------");
+		for(Category cat : categoryRepository.findAllByOrderByNameAsc()){
+			System.out.println(cat);
+		}
+		System.out.println("--------");
 	}
 	
 }
