@@ -21,7 +21,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 	public List<Article> findByBrand(String brand);
 	public List<Article> findByBrandContains(String brand);
 	public List<Article> findByBrandAndPrice(String brand, double price);
-	
 	public List<Article> findByDescriptionAndBrand(String description, String brand);
 	
 	@Query("select A from Article A where A.brand like %:x% and A.price > :y")
@@ -32,5 +31,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 	//public List<Article> findByCategoryId(Long catId);
 
 	public void deleteById(Long id);
+	
+	@Query("SELECT A.id, A.description, A.brand, A.price FROM Article A")
+	public List<Object[]> findDescriptionAndBrandAndPrice();	
 }
 
