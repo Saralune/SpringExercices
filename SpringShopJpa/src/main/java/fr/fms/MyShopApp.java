@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.util.Assert;
 
 import fr.fms.business.IMyShopAppArticleImpl;
@@ -362,6 +364,16 @@ public class MyShopApp<T> implements CommandLineRunner {
 	 * print all articles from DB by page
 	 */
 	public static void displayArticlesByPage() {
+		/*en gros lorsque vous récupérez vos données via la méthode findAll qui prend en argument 
+		 * un objet Pageable renvoyé par la méthode PageRequest.of(numéro de la page, nb d'éléments par page) 
+		 * vous obtenez un nombre d'article ...*/
 		
+//		Page<Article> articles = articleBusiness.readAll(PageRequest.of(2, 5));
+				//.findAll(PageRequest.of(2, 5));
+	       
+//        for(Article article : articles) {
+//            System.out.println(article);
+//        }
+//        System.out.println(articles.getTotalPages());
 	}
 }
