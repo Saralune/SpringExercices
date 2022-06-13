@@ -34,7 +34,7 @@ public class MyShopApp<T> implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Bonjour.");
+		System.out.println("\nBonjour.");
 
 		int choice = 0;
 		while (choice != 6) {
@@ -77,7 +77,7 @@ public class MyShopApp<T> implements CommandLineRunner {
 	public static void displayMenu() {
 		System.out.println("\nQue souhaitez-vous faire ?");
 		System.out.println("[1] -- Afficher tous les articles. ");
-		System.out.println("[2] -- Afficher tous les articles (par pages). ");
+		//System.out.println("[2] -- Afficher tous les articles (par pages). ");
 		System.out.println("[3] -- Gérer un article. ");
 		System.out.println("[4] -- Gérer une catégorie. ");
 		System.out.println("[5] -- Afficher tous les articles d'une catégorie.");
@@ -189,7 +189,12 @@ public class MyShopApp<T> implements CommandLineRunner {
 				break;
 				
 			case 2: //supprimer	 
-				deleteOne(name);
+				try {
+					deleteOne(name);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 				
 			case 3: //mettre à jour 
@@ -244,7 +249,7 @@ public class MyShopApp<T> implements CommandLineRunner {
 		}
 	}
 
-	public void deleteOne(String name) {
+	public void deleteOne(String name) throws Exception {
 		System.out.println("Choisissez la référence d'" + name +" que vous souhaitez supprimer :");
 		
 		if(name.equals(unArticle))	displayArticles();
@@ -279,6 +284,7 @@ public class MyShopApp<T> implements CommandLineRunner {
 		} else {
 			System.out.println("Supression abandonnée.");
 		}
+		scan.close();
 	}
 	
 	public void updateOne(String name) {
@@ -375,5 +381,28 @@ public class MyShopApp<T> implements CommandLineRunner {
 //            System.out.println(article);
 //        }
 //        System.out.println(articles.getTotalPages());
+	}
+	
+	  private void createBase() {
+		  catBusiness.addOne(new Category("Smartphone"));
+		  catBusiness.addOne(new Category("Tablet"));
+		  catBusiness.addOne(new Category("PC"));
+		  
+		  Category smartphone = catBusiness.findByName("Smartphone");
+		  Category tablet = catBusiness.findByName("Tablet");
+		  Category pc = catBusiness.findByName("PC");
+		
+		  articleBusiness.addOne(new Article("S11","Samsung",750,smartphone));
+		  articleBusiness.addOne(new Article("MI10","Xiaomi",350,smartphone));
+		  articleBusiness.addOne(new Article("Iphone","Apple",950,smartphone));
+		  articleBusiness.addOne(new Article("MI11","Xiaomi",850,smartphone));
+		  articleBusiness.addOne(new Article("S10","Samsung",450,smartphone));
+		  articleBusiness.addOne(new Article("MI9","Xiaomi",150,smartphone));
+		 
+		  articleBusiness.addOne(new Article("ipad","Apple",1250,tablet));
+		  articleBusiness.addOne(new Article("Galaxy A8","Samsung",250,tablet));
+		  articleBusiness.addOne(new Article("Galaxy S8","Samsung",1450,tablet));
+		 
+		  articleBusiness.addOne(new Article("mac","Apple",1250,pc));
 	}
 }
